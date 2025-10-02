@@ -1,9 +1,11 @@
 import express from 'express';
 const router = express.Router();
 
-import exerciseController from '../controller/exerciseController.js';
+import { index, indexCategories, indexTypes } from '../controller/exerciseController.js';
 
 //route -> index
-router.get("/", exerciseController.index)
+router.get("/", index)
+router.get("/categories", indexCategories)
+router.get("/types", indexTypes)
 
 export default router
