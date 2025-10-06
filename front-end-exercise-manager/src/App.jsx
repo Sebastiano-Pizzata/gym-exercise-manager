@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { GlobalProvider } from "./context/GlobalContext";
+import { GlobalProvider } from './context/GlobalContext'
 import DefaultLayout from './layout/DefaultLayout'
 import Homepage from './pages/Homepage';
 

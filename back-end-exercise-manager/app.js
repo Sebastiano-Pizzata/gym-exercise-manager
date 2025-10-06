@@ -11,7 +11,7 @@ import exerciseRouter from './routers/exerciseRouter.js';
 import errorNotFound from './middlewares/errors/notFound.js';
 import errorsHandler from './middlewares/errors/errorsHandler.js'
 
-app.use(cors({ origin: '' }));
+app.use(cors({ origin: 'http://localhost:5173' }));
 
 
 //body parser
