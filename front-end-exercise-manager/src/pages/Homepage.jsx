@@ -12,13 +12,16 @@ export default function Homepage() {
     return (
         <>
             <div>
+                Cerca gli esercizi perfetti per te
+            </div>
+            <div>
                 <ul>
                     {
                         exercises.length <= 0 ? (
                             <p>Nessun risultato trovato</p>
                         ) : (
                             exercises.map(e => {
-                                return <li key={e.id}> {e.name}</li>
+                                return <li key={e.id}>{e.name}</li>
                             })
                         )
                     }
