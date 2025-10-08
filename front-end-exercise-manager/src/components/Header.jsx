@@ -1,11 +1,17 @@
-import '../style/header.css'
+import "../style/header.css";
+import Search from "./Search";
 
-export default function Header() {
+function Header() {
     return (
-        <>
-            <header>
-                sono l'header
-            </header>
-        </>
-    )
+        <header>
+            <div className="header-content">
+                <h2>Gym Exercise</h2>
+                <div>
+                    <Search />
+                </div>
+            </div>
+        </header>
+    );
 }
+
+export default Header;
