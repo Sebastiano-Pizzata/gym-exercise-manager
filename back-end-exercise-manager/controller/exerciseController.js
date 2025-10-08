@@ -13,7 +13,13 @@ function index(req, res) {
                 message: "Error query index"
             })
         }
-        res.json(results)
+        const exercises = results.map(r => {
+            return {
+                ...r,
+                image: req.imagePath + r.image
+            }
+        })
+        res.json(exercises)
     })
 }
 
