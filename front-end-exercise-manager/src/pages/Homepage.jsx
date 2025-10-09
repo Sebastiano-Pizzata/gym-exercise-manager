@@ -1,5 +1,7 @@
 import { useGlobalContext } from "../context/GlobalContext";
 import { useEffect } from "react";
+import ExerciseCard from "../components/ExerciseCard";
+import "../style/banner.css";
 
 
 export default function Homepage() {
@@ -11,21 +13,25 @@ export default function Homepage() {
 
     return (
         <>
-            <div>
-                Cerca gli esercizi perfetti per te
+            <div className="banner-container">
+                <div className="banner-content">
+                    <div className="banner-description">
+                        <h1>Cerca gli esercizi perfetti per te </h1>
+                    </div>
+
+                </div>
             </div>
-            <div>
-                <ul>
-                    {
-                        exercises.length <= 0 ? (
-                            <p>Nessun risultato trovato</p>
-                        ) : (
-                            exercises.map(e => {
-                                return <li key={e.id}>{e.name}</li>
-                            })
-                        )
-                    }
-                </ul>
+
+            <div className="container">
+                {
+                    exercises.length <= 0 ? (
+                        <p>Nessun risultato trovato</p>
+                    ) : (
+                        exercises.map(e => {
+                            return <ExerciseCard key={e.id} exerciseProp={e} />
+                        })
+                    )
+                }
             </div>
 
         </>
