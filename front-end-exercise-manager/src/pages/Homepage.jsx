@@ -14,14 +14,15 @@ export default function Homepage() {
     return (
         <>
             <div className="banner-container">
-                <div className="banner-content">
-                    <div className="banner-description">
-                        <h1>Cerca gli esercizi perfetti per te </h1>
+                <div className="banner-overlay">
+                    <div className="banner-content">
+                        <div className="banner-description">
+                            <h1>Cerca gli esercizi perfetti per te</h1>
+                            <p>Scopri gli esercizi ideali per il tuo livello e obiettivi</p>
+                        </div>
                     </div>
-
                 </div>
             </div>
-
             <div className="container">
                 {
                     exercises.length <= 0 ? (

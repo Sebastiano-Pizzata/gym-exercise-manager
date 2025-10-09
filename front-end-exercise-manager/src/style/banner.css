@@ -2,23 +2,54 @@
 
 .banner-container {
     margin: 0 auto;
-    width: 80%;
-}
-
-
-.banner-content {
-    background-image: url('/public/img/bannerGym.jpg');
-    width: 100%;
-    height: 300px;
+    margin-top: 30px;
+    width: 95%;
+    max-width: 1200px;
+    position: relative;
+    overflow: hidden;
     border-radius: 30px;
 }
 
-.banner-description {
-    color: white;
+.banner-overlay {
+    background-image: url('/img/bannerGym.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-radius: 30px;
+}
+
+.banner-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    z-index: 1;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
     text-align: center;
+    color: white;
+    padding: 20px;
 }
 
 .banner-description h1 {
-    padding-top: 100px;
     font-family: "Playwrite DE SAS", cursive;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.banner-description p {
+    font-family: "Anton", sans-serif;
+    font-size: 1.2rem;
+    margin: 0;
+    animation: fadeInUp 1s ease-in-out;
 }
