@@ -4,6 +4,7 @@ import ExerciseCard from "../components/ExerciseCard";
 import "../style/banner.css";
 
 
+
 export default function Homepage() {
     const { exercises, fetchExercises } = useGlobalContext();
 

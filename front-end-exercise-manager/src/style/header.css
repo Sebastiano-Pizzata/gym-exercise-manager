@@ -12,6 +12,15 @@ header {
     transition: all 0.3s ease;
 }
 
+.home-link {
+    text-decoration: none;
+    color: white;
+}
+
+.home-link h2 {
+    font-family: fantasy;
+}
+
 
 .header-content {
     display: flex;
