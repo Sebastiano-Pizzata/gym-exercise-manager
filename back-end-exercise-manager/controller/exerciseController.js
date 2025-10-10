@@ -62,10 +62,9 @@ function show(req, res) {
     const { id } = req.params;
 
     const exerciseSql = 'SELECT * FROM exercises WHERE id = ?';
-    const categorySql = `SELECT * FROM exercises JOIN categories ON exercises.id = categories.id WHERE categories.id = ? `;
-    const typeSql = `SELECT * FROM exercises JOIN types ON exercises.type_id = types.id WHERE types.id = ? `;
+    const categorySql = 'SELECT * FROM categories WHERE id = ?';
+    const typeSql = 'SELECT * FROM types WHERE id = ?';
 
-    //exercise query
     connection.query(exerciseSql, [id], (exerciseErr, exerciseResult) => {
         if (exerciseErr) {
             return res.status(500).json({
@@ -78,9 +77,12 @@ function show(req, res) {
         }
 
         const exercise = exerciseResult[0];
+        exercise.image = req.imagePath + exercise.image;
 
-        // category query
-        connection.query(categorySql, [id], (categoryErr, categoryResult) => {
+        const categoryId = exercise.category_id;
+        const typeId = exercise.type_id;
+
+        connection.query(categorySql, [categoryId], (categoryErr, categoryResult) => {
             if (categoryErr) {
                 return res.status(500).json({
                     error: 500,
@@ -88,14 +90,14 @@ function show(req, res) {
                 });
             }
 
-            // type query
-            connection.query(typeSql, [id], (typeErr, typeResult) => {
+            connection.query(typeSql, [typeId], (typeErr, typeResult) => {
                 if (typeErr) {
                     return res.status(500).json({
                         error: 500,
                         message: "Errore nella query type"
                     });
                 }
+
                 res.json({
                     exercise,
                     categories: categoryResult,
@@ -105,6 +107,7 @@ function show(req, res) {
         });
     });
 }
+
 
 
 
