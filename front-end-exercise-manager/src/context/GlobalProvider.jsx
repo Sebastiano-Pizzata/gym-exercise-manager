@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { GlobalContext } from "./GlobalContext";
 
 const GlobalProvider = ({ children }) => {
@@ -6,6 +6,7 @@ const GlobalProvider = ({ children }) => {
 
     const [exercises, setExercise] = useState([]);
     const [singleExercise, setSingleExercise] = useState();
+    const [search, setSearch] = useState("");
 
     async function fetchExercises() {
         try {
@@ -41,13 +42,24 @@ const GlobalProvider = ({ children }) => {
     }
 
 
+    const searchExercise = useMemo(() => {
+        if (!search.trim()) return exercises;
+
+        return exercises.filter(exercise =>
+            exercise.name.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [search, exercises]);
+
 
 
     const value = {
         exercises,
         fetchExercises,
         singleExercise,
-        fetchSingleExercise
+        fetchSingleExercise,
+        search,
+        setSearch,
+        searchExercise
     }
 
     return (
