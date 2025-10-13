@@ -1,6 +1,7 @@
 import { useGlobalContext } from "../context/GlobalContext";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import SingleExerciseCard from "../components/SingleExerciseCard";
 
 export default function SingleExercise() {
     const { id } = useParams();
@@ -18,13 +19,7 @@ export default function SingleExercise() {
 
     return (
         <>
-            <div>
-                <h1>{singleExercise.exercise.name}</h1>
-                <div>
-                    <img src={singleExercise.exercise.image} alt={singleExercise.exercise.name} />
-                </div>
-            </div>
-
+            <SingleExerciseCard key={singleExercise.exercise.id} singleExCard={singleExercise.exercise} />
         </>
     )
 }
