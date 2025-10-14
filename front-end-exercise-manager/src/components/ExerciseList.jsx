@@ -5,9 +5,11 @@ export default function ExerciseList() {
     const { search, searchExercise } = useGlobalContext();
 
     if (!search.trim()) return null;
-
+    function handleMouseDown(e) {
+        e.stopPropagation();
+    }
     return (
-        <div className="exercise-list">
+        <div className="exercise-list" onMouseDown={handleMouseDown}>
             <p style={{ padding: '10px', color: '#999' }}>
                 {searchExercise.length} risultati trovati
             </p>
