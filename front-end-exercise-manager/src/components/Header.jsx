@@ -16,6 +16,12 @@ function Header() {
                     <Search />
                     <ExerciseList />
                 </div>
+
+                <div className="gym-card-btn">
+                    <Link to={'/exercise/gym-card'}>
+                        <button className="gym-btn">Crea la tua Scheda</button>
+                    </Link>
+                </div>
             </div>
         </header>
     );

@@ -19,13 +19,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 
 .search-wrapper {
     position: relative;
-    width: 100%;
+    width: 90%;
     max-width: 700px;
     margin: 0 auto;
 }
@@ -34,7 +33,7 @@ header {
 .search-bar {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 90%;
     border: 2px solid #ddd;
     border-radius: 999px;
     overflow: hidden;
@@ -109,4 +108,18 @@ header {
 .home-link {
     text-decoration: none;
     color: white;
+}
+
+
+.gym-btn {
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #febd69;
+    border: 2px solid #ddd;
+    font-size: 15px;
+}
+
+.gym-btn:hover {
+    cursor: pointer;
+    background-color: #f3a847;
 }
