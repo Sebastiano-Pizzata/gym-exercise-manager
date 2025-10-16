@@ -1,5 +1,7 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { GlobalContext } from "./GlobalContext";
+
+const daysOfWeek = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
 
 const GlobalProvider = ({ children }) => {
     const url = import.meta.env.VITE_ENDPOINT_URL;
@@ -7,6 +9,38 @@ const GlobalProvider = ({ children }) => {
     const [exercises, setExercise] = useState([]);
     const [singleExercise, setSingleExercise] = useState();
     const [search, setSearch] = useState("");
+    const [schedule, setSchedule] = useState({});
+
+    useEffect(() => {
+        const saved = localStorage.getItem("gymSchedule");
+        if (saved) {
+            setSchedule(JSON.parse(saved));
+        } else {
+            const initial = {};
+            daysOfWeek.forEach(day => initial[day] = []);
+            setSchedule(initial);
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("gymSchedule", JSON.stringify(schedule));
+    }, [schedule]);
+
+
+    const addExerciseToSchedule = (day, exerciseName) => {
+        setSchedule(prev => ({
+            ...prev,
+            [day]: [...(prev[day] || []), exerciseName]
+        }));
+    };
+
+
+    const removeExerciseFromSchedule = (day, indexToRemove) => {
+        setSchedule(prev => ({
+            ...prev,
+            [day]: prev[day].filter((_, idx) => idx !== indexToRemove)
+        }));
+    };
 
     async function fetchExercises() {
         try {
@@ -59,7 +93,11 @@ const GlobalProvider = ({ children }) => {
         fetchSingleExercise,
         search,
         setSearch,
-        searchExercise
+        searchExercise,
+        schedule,
+        addExerciseToSchedule,
+        removeExerciseFromSchedule,
+        daysOfWeek
     }
 
     return (

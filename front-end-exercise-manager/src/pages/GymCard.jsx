@@ -1,7 +1,9 @@
+import GymCardTable from "../components/GymCardTable"
+
 export default function GymCard() {
     return (
         <>
-            <h1>GymCard</h1>
+            <GymCardTable />
         </>
     )
 }
