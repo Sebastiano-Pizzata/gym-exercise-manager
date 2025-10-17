@@ -33,7 +33,7 @@ export default function GymCardTable() {
                             {(schedule[day] || []).map((exercise, index) => (
                                 <li key={index}>
                                     {exercise}
-                                    <button onClick={() => removeExerciseFromSchedule(day, index)} style={{ marginLeft: '10px' }}>
+                                    <button onClick={() => removeExerciseFromSchedule(day, index)} style={{ marginLeft: '10px', backgroundColor: 'red' }}>
                                         Rimuovi
                                     </button>
                                 </li>
