@@ -59,3 +59,31 @@
     line-height: 1.5;
     margin: 0;
 }
+
+.single-card-btn {
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+
+.add-btn {
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    background-color: #78F764;
+}
+
+.add-btn:hover {
+    background-color: #0C9769;
+}
+
+.single-card-btn {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.day-select {
+    padding: 5px;
+    border-radius: 10px;
+}
