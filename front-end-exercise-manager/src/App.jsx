@@ -3,6 +3,7 @@ import DefaultLayout from './layout/DefaultLayout'
 import Homepage from './pages/Homepage';
 import SingleExercise from './pages/SingleExercise';
 import GymCard from './pages/GymCard';
+import ScrollTop from './components/ScrollTop';
 
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <ScrollTop />
         <Routes>
           <Route Component={DefaultLayout}>
             <Route path='/' Component={Homepage} />
