@@ -33,7 +33,7 @@ export default function GymCardTable() {
                                         style={{
                                             marginLeft: '10px',
                                             backgroundColor: 'red',
-                                            color: 'white',
+                                            color: 'black',
                                             border: 'none',
                                             padding: '4px 8px',
                                             borderRadius: '4px',
