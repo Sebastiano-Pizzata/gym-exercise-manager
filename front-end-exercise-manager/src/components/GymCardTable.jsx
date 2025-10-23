@@ -1,55 +1,64 @@
 import { useGlobalContext } from "../context/GlobalContext"
+import "../style/GymCardTable.css"
 
 export default function GymCardTable() {
-    const {
-        schedule,
-        daysOfWeek,
-        removeExerciseFromSchedule
-    } = useGlobalContext();
+    const { schedule, daysOfWeek, removeExerciseFromSchedule } = useGlobalContext();
 
     return (
-        <div style={{ padding: "20px" }}>
+        <div className="gym-table-container">
             <h2>Gym Weekly Schedule</h2>
 
-            {daysOfWeek.map(day => (
-                <div
-                    key={day}
-                    style={{
-                        marginBottom: "20px",
-                        border: '1px solid #ccc',
-                        padding: '10px',
-                        borderRadius: '6px'
-                    }}
-                >
-                    <h3>{day}</h3>
+            <table className="gym-table">
+                <thead>
+                    <tr>
+                        <th>Giorno</th>
+                        <th>Esercizio</th>
+                        <th>Azioni</th>
+                    </tr>
+                </thead>
 
-                    {(schedule[day] && schedule[day].length > 0) ? (
-                        <ul>
-                            {schedule[day].map((exercise, index) => (
-                                <li key={index}>
-                                    {exercise}
+                <tbody>
+                    {daysOfWeek.map(day => {
+                        const exercises = schedule[day] || [];
+
+                        if (exercises.length === 0) {
+                            return (
+                                <tr key={day}>
+                                    <td className="day-column">{day}</td>
+                                    <td className="no-exercise" colSpan="2">
+                                        Nessun esercizio assegnato.
+                                    </td>
+                                </tr>
+                            );
+                        }
+
+                        return exercises.map((exercise, index) => (
+                            <tr key={`${day}-${index}`}>
+                                {/* Solo la prima riga del giorno mostra il nome del giorno */}
+                                {index === 0 && (
+                                    <td className="day-column" rowSpan={exercises.length}>
+                                        {day}
+                                    </td>
+                                )}
+
+                                <td className="exercise-name">
+                                    {typeof exercise === "string"
+                                        ? exercise
+                                        : exercise?.name || "Esercizio senza nome"}
+                                </td>
+                                <td className="button-cell">
                                     <button
                                         onClick={() => removeExerciseFromSchedule(day, index)}
-                                        style={{
-                                            marginLeft: '10px',
-                                            backgroundColor: 'red',
-                                            color: 'black',
-                                            border: 'none',
-                                            padding: '4px 8px',
-                                            borderRadius: '4px',
-                                            cursor: 'pointer'
-                                        }}
+                                        className="remove-btn"
                                     >
                                         Rimuovi
                                     </button>
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Nessun esercizio assegnato.</p>
-                    )}
-                </div>
-            ))}
+                                </td>
+                            </tr>
+                        ));
+                    })}
+                </tbody>
+            </table>
         </div>
     );
 }

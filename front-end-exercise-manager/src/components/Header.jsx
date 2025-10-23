@@ -2,8 +2,11 @@ import "../style/header.css";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import ExerciseList from "./ExerciseList";
+import { useGlobalContext } from "../context/GlobalContext";
 
 function Header() {
+    const { schedule } = useGlobalContext();
+    const totalExercises = Object.values(schedule).reduce((total, exercises) => total + exercises.length, 0);
     return (
         <header>
             <div className="header-container">
@@ -19,7 +22,9 @@ function Header() {
 
                 <div className="gym-card-btn">
                     <Link to={'/exercise/gym-card'}>
-                        <button className="gym-btn">Crea la tua Scheda</button>
+                        <button className="gym-btn">
+                            {totalExercises > 0 ? "Modifica la tua Scheda" : "Crea la tua Scheda"}
+                        </button>
                     </Link>
                 </div>
             </div>

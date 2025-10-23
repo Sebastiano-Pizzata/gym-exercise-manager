@@ -1,0 +1,81 @@
+.gym-table-container {
+    padding: 20px;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    max-width: 850px;
+    margin: 40px auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.gym-table-container h2 {
+    text-align: center;
+    color: #111;
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+}
+
+.gym-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.gym-table th,
+.gym-table td {
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: middle;
+    color: #111;
+}
+
+.gym-table th {
+    background-color: #333;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.day-column {
+    font-weight: bold;
+    width: 120px;
+    color: #111;
+}
+
+.exercise-name {
+    color: #111;
+    font-weight: 500;
+}
+
+.no-exercise {
+    color: #777;
+    font-style: italic;
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s ease;
+}
+
+.remove-btn:hover {
+    background-color: #e60000;
+}
+
+@media (max-width: 600px) {
+
+    .gym-table th,
+    .gym-table td {
+        font-size: 0.85rem;
+        padding: 8px 10px;
+    }
+}
