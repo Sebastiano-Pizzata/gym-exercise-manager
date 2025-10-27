@@ -11,7 +11,7 @@ function Header() {
         <header>
             <div className="header-container">
                 <Link className="home-link" to={'/'}>
-                    <h2>Gym Exercise</h2>
+                    <h2>Gym Scheduler</h2>
                 </Link>
 
 
