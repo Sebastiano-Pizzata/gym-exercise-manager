@@ -110,10 +110,46 @@ function show(req, res) {
 
 
 
+function related(req, res) {
+    const categoryId = req.query.category_id;
+    const currentId = req.query.id;
+
+    if (!categoryId || !currentId) {
+        return res.status(400).json({ error: "category_id o id esercizio mancante" })
+    }
+
+    const sql = `SELECT *
+    FROM exercises
+    WHERE category_id = ? AND id = ?
+    ORDER BY RAND()
+    LIMIT 4`;
+
+    connection.query(sql, [categoryId, currentId], (err, response) => {
+        if (err) {
+            console.error("Errore query related:", err)
+            return res.status(500).json({ error: "Error server related" })
+        }
+        if (response.length === 0) {
+            return res.status(404).json({ error: "Related not found" });
+        }
+        const totalRes = response.map((i) => {
+            return {
+                ...i,
+                image: req.imagePath + r.image
+            }
+        })
+
+        return (totalRes)
+    })
+}
+
+
+
 
 export {
     index,
     indexCategories,
     indexTypes,
-    show
+    show,
+    related
 } 

@@ -2,6 +2,7 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import SingleExerciseCard from "../components/SingleExerciseCard";
+import CategoryCarousel from "../components/CategoryCarousel";
 
 export default function SingleExercise() {
     const { id } = useParams();
@@ -20,6 +21,9 @@ export default function SingleExercise() {
     return (
         <>
             <SingleExerciseCard key={singleExercise.exercise.id} singleExCard={singleExercise.exercise} />
+            <div>
+                <CategoryCarousel />
+            </div>
         </>
     )
 }
