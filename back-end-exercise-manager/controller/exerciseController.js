@@ -111,37 +111,45 @@ function show(req, res) {
 
 
 function related(req, res) {
-    const categoryId = req.query.category_id;
-    const currentId = req.query.id;
+    const categoryId = Number(req.query.categoryId);
+    const currentId = Number(req.query.id);
 
-    if (!categoryId || !currentId) {
-        return res.status(400).json({ error: "category_id o id esercizio mancante" })
+    console.log("Parametri ricevuti:", { categoryId, currentId });
+
+    if (isNaN(categoryId) || isNaN(currentId)) {
+        return res.status(400).json({ error: "categoryId o id non valido" });
     }
 
-    const sql = `SELECT *
+    const sql = `
+    SELECT *
     FROM exercises
-    WHERE category_id = ? AND id = ?
+    WHERE category_id = ? AND id != ?
     ORDER BY RAND()
-    LIMIT 4`;
+    LIMIT 4
+  `;
 
-    connection.query(sql, [categoryId, currentId], (err, response) => {
+    connection.query(sql, [categoryId, currentId], (err, rows) => {
         if (err) {
-            console.error("Errore query related:", err)
-            return res.status(500).json({ error: "Error server related" })
+            console.error("Errore query related:", err);
+            return res.status(500).json({ error: "Errore server related" });
         }
-        if (response.length === 0) {
-            return res.status(404).json({ error: "Related not found" });
-        }
-        const totalRes = response.map((i) => {
-            return {
-                ...i,
-                image: req.imagePath + r.image
-            }
-        })
 
-        return (totalRes)
-    })
+        if (!rows || rows.length === 0) {
+            return res.status(404).json({ error: "Nessun esercizio correlato trovato" });
+        }
+
+        const exercises = rows.map((i) => ({
+            ...i,
+            image: req.imagePath + i.image
+        }));
+
+        res.json(exercises);
+    });
 }
+
+
+
+
 
 
 

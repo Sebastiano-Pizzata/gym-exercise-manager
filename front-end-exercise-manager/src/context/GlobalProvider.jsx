@@ -10,6 +10,7 @@ const GlobalProvider = ({ children }) => {
     const [singleExercise, setSingleExercise] = useState();
     const [search, setSearch] = useState("");
     const [schedule, setSchedule] = useState({});
+    const [related, setRelated] = useState([]);
 
     useEffect(() => {
         const saved = localStorage.getItem("gymSchedule");
@@ -60,7 +61,6 @@ const GlobalProvider = ({ children }) => {
 
     async function fetchSingleExercise(id) {
         try {
-            console.log('Fetching exercise with ID:', id);
             const cleanId = id.toString().startsWith(':') ? id.toString().slice(1) : id.toString();
             const response = await fetch(`${url}/exercise/${cleanId}`)
             if (!response.ok) {
@@ -74,6 +74,40 @@ const GlobalProvider = ({ children }) => {
             throw error
         }
     }
+
+
+    async function handleRelated(id) {
+        try {
+            if (!singleExercise?.exercise?.category_id) return;
+
+            const categoryId = singleExercise.exercise.category_id;
+            const currentId = Number(id.toString().replace(/^:/, '').trim());
+
+            if (!categoryId || isNaN(currentId)) {
+                console.warn("Parametri non validi per related:", { categoryId, currentId });
+                setRelated([]);
+                return;
+            }
+
+            const response = await fetch(`${url}/exercise/related?categoryId=${categoryId}&id=${currentId}`);
+            if (!response.ok) throw new Error("Errore server " + response.status);
+
+            let data = await response.json();
+
+            const filtered = data.filter(ex => Number(ex.id) !== currentId);
+            console.log("Related exercises filtrati:", filtered);
+            setRelated(filtered);
+
+            return filtered;
+        } catch (error) {
+            console.error("Errore in handleRelated:", error);
+            setRelated([]);
+        }
+    }
+
+
+
+
 
 
     const searchExercise = useMemo(() => {
@@ -97,7 +131,9 @@ const GlobalProvider = ({ children }) => {
         schedule,
         addExerciseToSchedule,
         removeExerciseFromSchedule,
-        daysOfWeek
+        daysOfWeek,
+        related,
+        handleRelated
     }
 
     return (

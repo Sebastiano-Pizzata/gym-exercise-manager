@@ -7,7 +7,8 @@ import { index, indexCategories, indexTypes, show, related } from '../controller
 router.get("/", index)
 router.get("/categories", indexCategories)
 router.get("/types", indexTypes)
-router.get("/:id", show)
 router.get("/related", related)
+router.get("/:id", show)
+
 
 export default router
