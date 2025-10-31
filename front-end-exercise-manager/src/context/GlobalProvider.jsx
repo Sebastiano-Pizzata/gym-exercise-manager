@@ -9,22 +9,21 @@ const GlobalProvider = ({ children }) => {
     const [exercises, setExercise] = useState([]);
     const [singleExercise, setSingleExercise] = useState();
     const [search, setSearch] = useState("");
-    const [schedule, setSchedule] = useState({});
+
     const [related, setRelated] = useState([]);
     const [sortBy, setSortBy] = useState("");
     const [sortOrder, setSortOrder] = useState(1);
     const [category, setCategory] = useState("");
 
-    useEffect(() => {
+    const [schedule, setSchedule] = useState(() => {
         const saved = localStorage.getItem("gymSchedule");
-        if (saved) {
-            setSchedule(JSON.parse(saved));
-        } else {
-            const initial = {};
-            daysOfWeek.forEach(day => initial[day] = []);
-            setSchedule(initial);
-        }
-    }, []);
+        if (saved) return JSON.parse(saved);
+
+        const initial = {};
+        daysOfWeek.forEach(day => initial[day] = []);
+        return initial;
+    })
+
 
     useEffect(() => {
         localStorage.setItem("gymSchedule", JSON.stringify(schedule));
