@@ -53,7 +53,7 @@ export default function CategoryCarousel() {
                                                 alt={item.name}
                                                 style={{ height: "150px", objectFit: "cover", width: "100%" }}
                                             />
-                                            <h5 className="mt-2">{item.name}</h5>
+                                            <h5 className="mt-2 text-light">{item.name}</h5>
                                         </div>
                                     </Link>
                                 </Col>
