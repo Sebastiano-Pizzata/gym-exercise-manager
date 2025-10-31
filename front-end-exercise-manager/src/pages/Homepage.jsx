@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import ExerciseCard from "../components/ExerciseCard";
 import "../style/banner.css";
 import SelectFilter from "../components/SelectFilter";
-// import "../style/homepage.css";
+import "../style/homepage.css";
 
 export default function Homepage() {
     const { fetchExercises, sortAndFilteredEx } = useGlobalContext();
@@ -27,8 +27,6 @@ export default function Homepage() {
 
 
             <div className="main-content-layout">
-
-
                 <div className="filters-sidebar">
                     <SelectFilter />
                 </div>
