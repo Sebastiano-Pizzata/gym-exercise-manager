@@ -21,7 +21,7 @@ export default function CategoryCarousel() {
     }
 
     return (
-        <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+        <div style={{ maxWidth: "400px", margin: "0 auto", padding: "10px" }}>
             <Carousel>
                 {related.map((item) => (
                     <Carousel.Item key={item.id}>

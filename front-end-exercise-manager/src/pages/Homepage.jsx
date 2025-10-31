@@ -2,11 +2,11 @@ import { useGlobalContext } from "../context/GlobalContext";
 import { useEffect } from "react";
 import ExerciseCard from "../components/ExerciseCard";
 import "../style/banner.css";
-
-
+import SelectFilter from "../components/SelectFilter";
+// import "../style/homepage.css";
 
 export default function Homepage() {
-    const { exercises, fetchExercises } = useGlobalContext();
+    const { fetchExercises, sortAndFilteredEx } = useGlobalContext();
 
     useEffect(() => {
         fetchExercises()
@@ -24,16 +24,27 @@ export default function Homepage() {
                     </div>
                 </div>
             </div>
-            <div className="container">
-                {
-                    exercises.length <= 0 ? (
+
+
+            <div className="main-content-layout">
+
+
+                <div className="filters-sidebar">
+                    <SelectFilter />
+                </div>
+
+
+
+                <div className="exercises-list">
+                    {sortAndFilteredEx.length <= 0 ? (
                         <p>Nessun risultato trovato</p>
                     ) : (
-                        exercises.map(e => {
-                            return <ExerciseCard key={e.id} exerciseProp={e} />
-                        })
-                    )
-                }
+                        sortAndFilteredEx.map((e) => (
+                            <ExerciseCard key={e.id} exerciseProp={e} />
+                        ))
+                    )}
+                </div>
+
             </div>
 
         </>

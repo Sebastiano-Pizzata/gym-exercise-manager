@@ -11,6 +11,9 @@ const GlobalProvider = ({ children }) => {
     const [search, setSearch] = useState("");
     const [schedule, setSchedule] = useState({});
     const [related, setRelated] = useState([]);
+    const [sortBy, setSortBy] = useState("");
+    const [sortOrder, setSortOrder] = useState(1);
+    const [category, setCategory] = useState("");
 
     useEffect(() => {
         const saved = localStorage.getItem("gymSchedule");
@@ -119,6 +122,28 @@ const GlobalProvider = ({ children }) => {
     }, [search, exercises]);
 
 
+    const handleSort = (value) => {
+        if (value === 'title_asc') {
+            setSortBy('title');
+            setSortOrder(1);
+        } else if (value === 'title_desc') {
+            setSortBy('title')
+            setSortOrder(-1)
+        } else {
+            setSortBy('')
+            setSortOrder(0)
+        }
+    }
+
+
+    const sortAndFilteredEx = useMemo(() => {
+        let filtered = [...exercises];
+        if (category) filtered = filtered.filter(ex => ex.category_id === category);
+        if (sortBy === 'title') filtered.sort((a, b) => a.name.localeCompare(b.name) * sortOrder)
+        return filtered
+    }, [exercises, category, sortBy, sortOrder])
+
+
 
     const value = {
         exercises,
@@ -133,7 +158,13 @@ const GlobalProvider = ({ children }) => {
         removeExerciseFromSchedule,
         daysOfWeek,
         related,
-        handleRelated
+        handleRelated,
+        handleSort,
+        sortAndFilteredEx,
+        category,
+        setCategory,
+        sortOrder,
+        setSortOrder
     }
 
     return (
