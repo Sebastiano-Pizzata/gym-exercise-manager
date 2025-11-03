@@ -15,7 +15,7 @@ export default function SingleExerciseCard({ singleExCard }) {
     const handleAdd = () => {
         if (selectedDay) {
             addExerciseToSchedule(selectedDay, name);
-            setSelectedDay(""); // reset dropdown
+            setSelectedDay("");
         }
     };
 

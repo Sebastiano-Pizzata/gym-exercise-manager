@@ -3,6 +3,7 @@ import { GlobalContext } from "./GlobalContext";
 
 const daysOfWeek = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'];
 
+
 const GlobalProvider = ({ children }) => {
     const url = import.meta.env.VITE_ENDPOINT_URL;
 
