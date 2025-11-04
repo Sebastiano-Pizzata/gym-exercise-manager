@@ -13,7 +13,7 @@ export default function GymCardTable() {
                     <tr>
                         <th>Giorno</th>
                         <th>Esercizio</th>
-                        {/* <th>Reps</th> */}
+                        <th>Reps</th>
                         <th>Azioni</th>
                     </tr>
                 </thead>
@@ -50,11 +50,11 @@ export default function GymCardTable() {
                                 </td>
 
 
-                                {/* <td className="reps-column">
+                                <td className="reps-column">
                                     {typeof exercise === "object" && exercise?.reps
                                         ? exercise.reps
                                         : "—"}
-                                </td> */}
+                                </td>
 
 
                                 <td className="button-cell">
